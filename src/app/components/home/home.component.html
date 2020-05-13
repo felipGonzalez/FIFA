@@ -1,0 +1,103 @@
+<nav class="navbar navbar-light">
+  <h1>Lista de Equipos ({{listTeam.length}})</h1>
+  <form class="form-inline">
+    <button class="btn btn-outline-success my-2 my-sm-0" (click)="createNewTeam()" type="button">Agregar</button>
+  </form>
+</nav>
+
+<div class="text-center" *ngIf="!flagList">
+  <div class="spinner-border" role="status">
+    <span class="sr-only">Cargando...</span>
+  </div>
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="flagList && listTeam.length === 0">
+  No hay registrados
+</div>
+
+
+
+<div class="row">
+  <div class="col-2">
+    <div class="form-group">
+      <label for="id">Buscar por Id</label>
+      <input [(ngModel)]="id" name='capacidad' type="number" class="form-control round"
+          required>
+          
+  </div>
+  
+  </div>
+  
+  <div class="col-12">
+    <label for="">Buscar por Rango de fechas</label>
+    <div class="row">
+      <div class="col-4">
+
+        <div class="form-group">
+          <mat-form-field>
+              <mat-label>Fecha inicio</mat-label>
+              <input [(ngModel)]="dateInit" name='fecha_inicio'
+                  class="form-control round"  matInput [matDatepicker]="picker1">
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+          </mat-form-field>
+      </div>
+
+      </div>
+      <div class="col-4">
+        <mat-form-field>
+          <mat-label>Fecha Fin</mat-label>
+          <input [(ngModel)]="dateEnd" name='fecha_fin'
+              class="form-control round"  matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      </div>
+    </div>
+   
+  </div>
+  <div class="col-12">
+
+    <button class="btn btn-warning my-2 my-sm-0 " (click)="search()" type="button">Buscar</button>
+  </div>
+</div>
+
+<div *ngIf="result" class="alert alert-danger" role="alert">
+  {{message}}
+</div>
+
+<div>
+  <br>
+  <table class="table" *ngIf="listTeam.length !== 0">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Estadio</th>
+        <th scope="col">SitioWeb</th>
+        <th scope="col">Nacionalidad</th>
+        <th scope="col">Fundacion</th>
+        <th scope="col">Entrenador</th>
+        <th scope="col">Capacidad</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of listTeam;" class="trData">
+        <td>{{data.id}}</td>
+        <td>{{data.nombre}}</td>
+        <td>{{data.estadio}}</td>
+        <td>{{data.sitioWeb}}</td>
+        <td>{{data.nacionalidad}}</td>
+        <td>{{data.fundacion | date :'short'}}</td>
+        <td>{{data.entrenador}}</td>
+        <td>{{data.capacidad}}</td>
+        <td>{{data.valor}}</td>
+        <td><img src="../../assets/edit.png" class="editIcon" (click)="edit(data)">
+          <img src="../../assets/delete.png" class="editIcon" (click)="delete(data.id)">
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

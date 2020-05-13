@@ -1,0 +1,75 @@
+<nav class="navbar navbar-light">
+    <h1>Gestión Equipo</h1>
+    <form class="form-inline">
+      <button class="btn btn-outline-success my-2 my-sm-0" 
+      (click)="navigateHome()"type="button">Volver</button>
+    </form>
+</nav>
+<div *ngIf="isValid" class="alert alert-danger" role="alert">
+    {{message}}
+</div>
+<div class="container">
+    <form class="from">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input [(ngModel)]="team.nombre" name='nombre' type="text" class="form-control round"
+                required>
+        </div>
+        
+        <div class="form-group">
+            <label for="estadio">Estadio</label>
+            <input [(ngModel)]="team.estadio" name='estadio' type="text" class="form-control round"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="sitioWeb">Sitio Web</label>
+            <input [(ngModel)]="team.sitioWeb" name='sitioWeb' type="text" class="form-control round"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="nacionalidad">Nacionalidad</label>
+            <input [(ngModel)]="team.nacionalidad" name='nacionalidad' type="text" class="form-control round"
+                required>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Fundación</mat-label>
+                <input [(ngModel)]="team.fundacion" name='fecha_fundacion'
+                    class="form-control round" required matInput [matDatepicker]="picker1">
+                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <label for="entrenador">Entrenador</label>
+            <input [(ngModel)]="team.entrenador" name='entrenador' type="text" class="form-control round"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="capacidad">Capacidad</label>
+            <input [(ngModel)]="team.capacidad" name='capacidad' type="number" class="form-control round"
+                required>
+        </div>
+
+        <div class="form-group">
+            <label for="valor">Valor</label>
+            <input [(ngModel)]="team.valor" name='capacidad' type="number" class="form-control round"
+                required>
+        </div>
+
+        <div class="row">
+            <div class="col-3" *ngIf="!update">
+                <button type="submit" (click) ="saveTeam()"class="btn btn-primary mtBtn">Guardar</button>
+            </div>
+            <div class="col-3" *ngIf="update">
+                <button type="submit" (click) ="updateTeam()"class="btn btn-primary mtBtn">Actualizar</button>
+            </div>
+        </div>
+
+    </form>
+</div>
